@@ -2,7 +2,7 @@ import { ColorScheme, ColorSchemeProvider, MantineProvider, Paper } from "@manti
 import { useHotkeys, useLocalStorageValue } from "@mantine/hooks";
 import "./App.css";
 // import AppShellExample from "./Components/AppShell";
-// import Buttons from "./Components/Buttons";
+import Buttons from "./Components/Button";
 import Cards from "./Components/Cards";
 import LightAndDarkModeButton from "./Components/LightDarkButton";
 
@@ -25,6 +25,7 @@ function App() {
         {/* <AppShellExample /> */}
         <Cards />
         <LightAndDarkModeButton />
+        <Buttons />
         </Paper>
       </MantineProvider>
       </ColorSchemeProvider>
