@@ -1,54 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { Button, Paper, Text, Loader, MantineProvider } from '@mantine/core';
+import { ColorScheme, ColorSchemeProvider, MantineProvider, Paper } from "@mantine/core";
+import { useHotkeys, useLocalStorageValue } from "@mantine/hooks";
+import "./App.css";
+// import AppShellExample from "./Components/AppShell";
+// import Buttons from "./Components/Buttons";
+import Cards from "./Components/Cards";
+import LightAndDarkModeButton from "./Components/LightDarkButton";
 
 function App() {
+  const [colorScheme, setColorScheme] = useLocalStorageValue<ColorScheme>({
+    key: 'mantine-color-scheme',
+    defaultValue: 'light',
+  });
+
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
+  useHotkeys([['mod+J', () => toggleColorScheme()]]);
+  
   return (
     <div className="App">
-      <MantineProvider theme={{
-        fontFamily: 'Open Sans',
-        colorScheme: 'dark',
-        fontSizes: {md: 12},
-        loader: 'bars',
-        colors: {
-          blue:  [
-            '#d5d7e0',
-            '#acaebf',
-            '#8c8fa3',
-            '#666980',
-            '#4d4f66',
-            '#34354a',
-            '#2b2c3d',
-            '#1d1e30',
-            '#0c0d21',
-            '#01010a',
-          ],
-        }
-    
-      }}
-      styles={{
-        Button: (theme) => ({
-          root: {
-            backgroundColor: theme.colors.blue[0]
-          }
-        })
-      }}
-      >
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+      <MantineProvider theme={{colorScheme}}>
         <Paper>
-          <Text>This is a simple text</Text>
-          <Text>This is a simple text TAG and thats all it does</Text>
+        {/* <AppShellExample /> */}
+        <Cards />
+        <LightAndDarkModeButton />
         </Paper>
-      
-        <Button>Hello world!</Button>
-        <Button>Hello world!</Button>
-        <Loader />
-
-        <MantineProvider theme={{ fontFamily: 'Greycliff CF, sans-serif' }}>
-        <Button>Greycliff CF button</Button>
       </MantineProvider>
-      
-        </MantineProvider>
+      </ColorSchemeProvider>
+      <h1>Test</h1>
     </div>
   );
 }
