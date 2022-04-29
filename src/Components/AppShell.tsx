@@ -13,7 +13,8 @@ import {
 // import Buttons from "./Components/Button";
 // import Cards from "./Components/Cards";
 import LightAndDarkModeButton from './LightDarkButton';
-import TableExample from './TableExample';
+import ChipsExample from './ChipsExample';
+// import TableExample from './TableExample';
 
 export default function AppShellDemo() {
   const theme = useMantineTheme();
@@ -77,7 +78,8 @@ export default function AppShellDemo() {
         </Header>
       }
     >
-      <TableExample />
+      {/* <TableExample /> */}
+      <ChipsExample />
     </AppShell>
   );
 }
